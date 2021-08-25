@@ -1,0 +1,15 @@
+server:
+  port: 9090
+
+eureka:
+  client:
+    register-with-eureka: true
+    fetch-registry: true
+  instance:
+    prefer-ip-address: true
+    hostname: localhost
+
+monitor:
+  default-timeout: 60000
+  status-interval: 15000
+  status-lifetime: 15000
