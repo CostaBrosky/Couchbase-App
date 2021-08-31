@@ -33,4 +33,30 @@ public class ProjectHandler {
         return task.flatMap(taskService::createTask)
                 .flatMap(data -> ServerResponse.ok().contentType(MediaType.APPLICATION_JSON).bodyValue(data));
     }
+
+    public Mono<ServerResponse> findProjectById(ServerRequest serverRequest) {
+        String id = serverRequest.pathVariable("id");
+
+        return projectService.findById(id)
+                .flatMap(data -> ServerResponse.ok().contentType(MediaType.APPLICATION_JSON).bodyValue(data))
+                .switchIfEmpty(ServerResponse.notFound().build());
+    }
+
+    public Mono<ServerResponse> findAllProject(ServerRequest serverRequest) {
+        return projectService.findAll().collectList()
+                .flatMap(data -> ServerResponse.ok().contentType(MediaType.APPLICATION_JSON).bodyValue(data));
+    }
+
+    public Mono<ServerResponse> findTaskById(ServerRequest serverRequest) {
+        String id = serverRequest.pathVariable("id");
+
+        return taskService.findById(id)
+                .flatMap(data -> ServerResponse.ok().contentType(MediaType.APPLICATION_JSON).bodyValue(data))
+                .switchIfEmpty(ServerResponse.notFound().build());
+    }
+
+    public Mono<ServerResponse> findAllTask(ServerRequest serverRequest) {
+        return taskService.findAll().collectList()
+                .flatMap(data -> ServerResponse.ok().contentType(MediaType.APPLICATION_JSON).bodyValue(data));
+    }
 }
