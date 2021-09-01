@@ -7,5 +7,6 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class CoachbaseApplication {
     public static void main(String[] args) {
         SpringApplication.run(CoachbaseApplication.class, args);
+
     }
 }
